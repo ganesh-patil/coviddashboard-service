@@ -12,8 +12,8 @@ import static java.lang.String.format;
 
 @Component
 public class JwtTokenUtil {
-    private final String jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP";
-    private final String jwtIssuer = "example.io";
+    private final String jwtSecret = "iMcbjYkfuRoCanvMQIwI";
+    private final String jwtIssuer = "coviddashboard.io";
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

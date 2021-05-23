@@ -56,7 +56,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null,
                 userDetails == null ?
-                        null : userDetails.getAuthorities() // I chnged this to null
+                        null : userDetails.getAuthorities()
         );
 
         authentication.setDetails(

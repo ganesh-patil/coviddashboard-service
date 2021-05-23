@@ -12,22 +12,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-//@Api(tags = "Authentication")
 @RestController
 @RequestMapping(path = "api/public")
 public class AuthApi {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
-    //private final UserViewMapper userViewMapper;
 
     public AuthApi(AuthenticationManager authenticationManager,
                    JwtTokenUtil jwtTokenUtil
-               //    UserViewMapper userViewMapper
     ) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
-     //   this.userViewMapper = userViewMapper;
     }
 
     @PostMapping("login")

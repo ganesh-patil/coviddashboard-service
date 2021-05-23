@@ -1,9 +1,6 @@
-package com.covid.dashboard;
+package com.covid.dashboard.User;
 
 
-import com.covid.dashboard.User.User;
-import com.covid.dashboard.User.UserRepository;
-import jdk.nashorn.internal.ir.ReturnNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.FieldError;
@@ -19,26 +16,21 @@ import java.util.Map;
 public class UserController {
 
 
-    private final UserRepository userRepository;
-
+    private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
 
-    UserController(UserRepository userRepository, PasswordEncoder passwordEncoder){
-        this.userRepository = userRepository;
+    UserController(UserService userService, PasswordEncoder passwordEncoder){
+        this.userService = userService;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @GetMapping
-    public String getUser(){
-
-        return "Ganesh";
     }
 
     @PostMapping
     public User registerUser(@Valid  @RequestBody User userData){
         userData.setPassword(passwordEncoder.encode(userData.getPassword()));
-        return this.userRepository.save(userData);
+        User savedUser =  this.userService.saveUser(userData);
+        savedUser.setPassword(null);
+        return savedUser;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

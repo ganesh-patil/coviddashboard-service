@@ -1,8 +1,8 @@
 package com.covid.dashboard;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -10,13 +10,19 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/dashboard")
 public class DashboardController {
 
+    @Value("${covid.api.url}")
+    String covidApiUrl;
+
     @GetMapping
     public String getLatestCases() {
         RestTemplate restTemplate = new RestTemplate();
-        String fooResourceUrl
-                = "https://api.rootnet.in/covid19-in/stats/latest"; // load this from properties
-       // ResponseEntity<String> response
-            //    = restTemplate.getForEntity(fooResourceUrl , String.class);
-        return restTemplate.getForEntity(fooResourceUrl , String.class).getBody();
+        return restTemplate.getForEntity(covidApiUrl , String.class).getBody();
+    }
+
+
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(Exception.class)
+    public String handleExceptions(Exception ex) {
+        return ex.getMessage();
     }
 }
