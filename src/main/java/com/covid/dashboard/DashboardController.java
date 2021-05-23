@@ -1,22 +1,22 @@
 package com.covid.dashboard;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 
 @RestController
 @RequestMapping("/api/dashboard")
 public class DashboardController {
 
-    @Value("${covid.api.url}")
-    String covidApiUrl;
+    private final DashboardService dashboardService;
+
+    public DashboardController(DashboardService dashboardService){
+        this.dashboardService = dashboardService;
+    }
 
     @GetMapping
-    public String getLatestCases() {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForEntity(covidApiUrl , String.class).getBody();
+    public String getLatestCasesCount() {
+        return dashboardService.getLatestCovidCount();
     }
 
 

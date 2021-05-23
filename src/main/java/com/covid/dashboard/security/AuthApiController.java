@@ -1,7 +1,6 @@
 package com.covid.dashboard.security;
 
 import com.covid.dashboard.User.User;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,13 +13,13 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "api/public")
-public class AuthApi {
+public class AuthApiController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
 
-    public AuthApi(AuthenticationManager authenticationManager,
-                   JwtTokenUtil jwtTokenUtil
+    public AuthApiController(AuthenticationManager authenticationManager,
+                             JwtTokenUtil jwtTokenUtil
     ) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
